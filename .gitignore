@@ -1,2 +1,7 @@
 #npm packages
 node_modules/
+
+#image
+public/audio/
+public/img/
+public/video/
