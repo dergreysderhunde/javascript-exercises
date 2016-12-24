@@ -15,8 +15,8 @@ app.get('/', (req, res) => {
 	res.render('index', linksObject);
 });
 
-app.get('/bunny', (req, res) => {
-	res.render('bunny');
+app.get('/deepbunnyhole', (req, res) => {
+	res.render('deepbunnyhole');
 })
 
 app.listen(8001);

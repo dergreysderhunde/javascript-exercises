@@ -1,7 +1,7 @@
 const linksObject = {
 	linksArray: [
 		// add new paths on here
-		{"href": "bunny", "label":"bunny"}
+		{"href": "deepbunnyhole", "label":"deepbunnyhole"}
 	]
 }
 
