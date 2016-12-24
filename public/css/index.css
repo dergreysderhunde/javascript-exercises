@@ -1,0 +1,14 @@
+body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	background-color: #25373D;
+}
+
+a {
+	font-family: monospace;
+	font-size: 12px;
+	color: white;
+	text-decoration: none;
+}
