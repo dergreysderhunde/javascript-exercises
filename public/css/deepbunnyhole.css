@@ -4,4 +4,10 @@ body {
 
 .header {
 	height: 100vh;
+	background-image: url(/static/img/deepbunnyhole-header.jpg);
+	background-size: cover;
+}
+
+.content {
+	height: 100vh;
 }
