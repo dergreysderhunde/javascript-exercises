@@ -1,12 +1,20 @@
+var minval = -0.5;
+var maxval = 0.5;
+
+var minSlider;
+var maxSlider;
+
 function setup() {
-	createCanvas(360, 360);
+	createCanvas(200, 200);
 	pixelDensity(1);
-	var maxiterations = 100;
+	minSlider = createSlider(-2.5, 0, -2.5, 0.01)
+	maxSlider = createSlider(0, 2.5, 2.5, 0.01)
+	var maxiterations = 50;
 	loadPixels();
 	for(var x = 0; x < width; x++) {
 		for(var y = 0; y < height; y++) {
-			var a = map(x, 0, width, -2.5, 2.5);
-			var b = map(y, 0, height, -2.5, 2.5);
+			var a = map(x, 0, width, minSlider.value(), maxSlider.value());
+			var b = map(y, 0, height, minSlider.value(), maxSlider.value());
 
 			var ca = a;
 			var cb = b;
@@ -21,14 +29,15 @@ function setup() {
 				a = aa + ca;
 				b = bb + cb;
 
-				if(a + b > 16) {
+				if(abs(a + b) > 16) {
 					break;
 				}
 
 				n++;
 			}
 
-			var bright = map(n, 0, maxiterations, 0, 255);
+			var bright = map(n, 0, maxiterations, 0, 1);
+			bright = map(sqrt(bright), 0, 1, 0, 255);
 
 			if (n === maxiterations) {
 				bright = 0;
