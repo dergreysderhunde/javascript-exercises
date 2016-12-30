@@ -20,3 +20,5 @@ app.get('/deepbunnyhole', (req, res) => {
 })
 
 app.listen(8001);
+
+console.log('Server running at http://127.0.0.1:8001');
