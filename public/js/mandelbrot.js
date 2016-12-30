@@ -4,7 +4,7 @@ function setup() {
 }
 
 function draw() {
-	const iterations = 50;
+	const iterations = 200;
 	const minX = -2;
 	const maxX = 1;
 	const minY = -1;
@@ -34,18 +34,23 @@ function draw() {
 				n++;
 			}
 
-			let bright = map(n, 0, iterations, 0, 1);
-			bright = map(sqrt(bright), 0, 1, 0, 255);
-
-			if (n === iterations) {
-				bright = 0;
-			}
-
 			const pix = (x + y * width) * 4;
-			pixels[pix + 0] = bright;
-			pixels[pix + 1] = bright;
-			pixels[pix + 2] = bright;
-			pixels[pix + 3] = 255;
+
+			if (n === iterations || (a === 0 && b === 0)) {
+				pixels[pix + 0] = 0;
+				pixels[pix + 1] = 0;
+				pixels[pix + 2] = 0;
+				pixels[pix + 3] = 255;
+			}
+			else {
+				let bright = map(n, 0, iterations, 0, 1);
+				bright = map(sqrt(bright), 0, 1, 0, 255);
+
+				pixels[pix + 0] = bright;
+				pixels[pix + 1] = bright;
+				pixels[pix + 2] = 150;
+				pixels[pix + 3] = 255;
+			}
 		}
 	}
 
