@@ -1,52 +1,47 @@
-var minval = -0.5;
-var maxval = 0.5;
-
-var minSlider;
-var maxSlider;
-
 function setup() {
-	createCanvas(200, 200);
+	createCanvas(360, 240);
 	pixelDensity(1);
-	minSlider = createSlider(-2.5, 0, -2.5, 0.01)
-	maxSlider = createSlider(0, 2.5, 2.5, 0.01)
 }
 
 function draw() {
-	var maxiterations = 50;
+	const iterations = 50;
+	const minX = -2;
+	const maxX = 1;
+	const minY = -1;
+	const maxY = 1;
+
 	loadPixels();
-	for(var x = 0; x < width; x++) {
-		for(var y = 0; y < height; y++) {
-			var a = map(x, 0, width, minSlider.value(), maxSlider.value());
-			var b = map(y, 0, height, minSlider.value(), maxSlider.value());
 
-			var ca = a;
-			var cb = b;
+	for(let x = 0; x < width; x++) {
+		for(let y = 0; y < height; y++) {
+			let a = map(x, 0, width, minX, maxX);
+			let b = map(y, 0, height, minY, maxY);
+			const constA = a;
+			const constB = b;
+			let n = 0;
 
-			var n = 0;
-			var z = 0;
+			while(n < iterations) {
+				const letA = a * a - b * b;
+				const letB = 2 * a * b;
 
-			while(n < maxiterations) {
-				var aa = a * a - b * b;
-				var bb = 2 * a * b;
+				a = letA + constA;
+				b = letB + constB;
 
-				a = aa + ca;
-				b = bb + cb;
-
-				if(abs(a + b) > 16) {
+				if (a === letA && b === letB) {
 					break;
 				}
 
 				n++;
 			}
 
-			var bright = map(n, 0, maxiterations, 0, 1);
+			let bright = map(n, 0, iterations, 0, 1);
 			bright = map(sqrt(bright), 0, 1, 0, 255);
 
-			if (n === maxiterations) {
+			if (n === iterations) {
 				bright = 0;
 			}
 
-			var pix = (x + y * width) * 4;
+			const pix = (x + y * width) * 4;
 			pixels[pix + 0] = bright;
 			pixels[pix + 1] = bright;
 			pixels[pix + 2] = bright;
