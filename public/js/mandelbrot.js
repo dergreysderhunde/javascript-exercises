@@ -9,6 +9,9 @@ function setup() {
 	pixelDensity(1);
 	minSlider = createSlider(-2.5, 0, -2.5, 0.01)
 	maxSlider = createSlider(0, 2.5, 2.5, 0.01)
+}
+
+function draw() {
 	var maxiterations = 50;
 	loadPixels();
 	for(var x = 0; x < width; x++) {
