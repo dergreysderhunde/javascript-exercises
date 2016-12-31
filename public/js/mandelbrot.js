@@ -1,3 +1,6 @@
+// author: Daniel Shiffman
+// source: https://www.youtube.com/watch?v=6z7GQewK-Ks
+
 function setup() {
 	createCanvas(360, 240);
 	pixelDensity(1);
