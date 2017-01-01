@@ -1,7 +1,7 @@
 // author: Daniel Shiffman
 // source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 
-const iterations = 20;
+const iterations = 10;
 
 let lastX;
 let lastY;
@@ -97,4 +97,12 @@ function mouseReleased() {
 	currentX = 0;
 	currentY = 0;
 	loop();
+}
+
+function mouseWheel() {
+	const dir = -(event.delta / abs(event.delta));
+	minX += 0.1 * dir;
+	maxX -= 0.1 * dir;
+	minY += 0.066 * dir;
+	maxY -= 0.066 * dir;
 }
