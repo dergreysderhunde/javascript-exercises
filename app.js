@@ -17,11 +17,11 @@ app.get('/', (req, res) => {
 
 app.get('/deepbunnyhole', (req, res) => {
 	res.render('deepbunnyhole');
-})
+});
 
 app.get('/mandelbrot', (req, res) => {
 	res.render('mandelbrot');
-})
+});
 
 app.listen(8001);
 

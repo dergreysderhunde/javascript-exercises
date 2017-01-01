@@ -1,6 +1,8 @@
 // author: Daniel Shiffman
 // source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 
+const iterations = 20;
+
 let lastX;
 let lastY;
 let currentX;
@@ -28,20 +30,18 @@ function setup() {
 }
 
 function draw() {
-	const iterations = 20;
-
 	loadPixels();
 
-	for(let x = 0; x < width; x++) {
-		for(let y = 0; y < height; y++) {
+	for (let x = 0; x < width; x++) {
+		for (let y = 0; y < height; y++) {
 			let a = map(x, 0, width, minX, maxX);
 			let b = map(y, 0, height, minY, maxY);
 			const constA = a;
 			const constB = b;
 			let n = 0;
 
-			while(n < iterations) {
-				const letA = a * a - b * b;
+			while (n < iterations) {
+				const letA = (a * a) - (b * b);
 				const letB = 2 * a * b;
 
 				a = letA + constA;
@@ -54,15 +54,14 @@ function draw() {
 				n++;
 			}
 
-			const pix = (x + y * width) * 4;
+			const pix = (x + (y * width)) * 4;
 
 			if (n === iterations || (a === 0 && b === 0)) {
 				pixels[pix + 0] = 0;
 				pixels[pix + 1] = 0;
 				pixels[pix + 2] = 0;
 				pixels[pix + 3] = 255;
-			}
-			else {
+			}			else {
 				let bright = map(n, 0, iterations, 0, 1);
 				bright = map(sqrt(bright), 0, 1, 0, 255);
 
@@ -83,7 +82,7 @@ function mousePressed() {
 	setTimeout(() => {
 		lastX = mouseX;
 		lastY = mouseY;
-	}, 0)
+	}, 0);
 }
 
 function mouseReleased() {
