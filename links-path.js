@@ -10,6 +10,10 @@ function paths(app, linksObject) {
 	app.get('/mandelbrot', (req, res) => {
 		res.render('mandelbrot');
 	});
+
+	app.get('/jsonbot', (req, res) => {
+		res.render('jsonbot');
+	})
 }
 
 module.exports.paths = paths;
