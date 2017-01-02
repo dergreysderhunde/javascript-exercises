@@ -76,33 +76,33 @@ function draw() {
 	updatePixels();
 }
 
-function mousePressed() {
-	noLoop();
+// function mousePressed() {
+// 	noLoop();
 
-	setTimeout(() => {
-		lastX = mouseX;
-		lastY = mouseY;
-	}, 0);
-}
+// 	setTimeout(() => {
+// 		lastX = mouseX;
+// 		lastY = mouseY;
+// 	}, 0);
+// }
 
-function mouseReleased() {
-	currentX = mouseX;
-	currentY = mouseY;
-	minX += (lastX - currentX) * ratioX;
-	maxX += (lastX - currentX) * ratioX;
-	minY += (lastY - currentY) * ratioY;
-	maxY += (lastY - currentY) * ratioY;
-	lastX = 0;
-	lastY = 0;
-	currentX = 0;
-	currentY = 0;
-	loop();
-}
+// function mouseReleased() {
+// 	currentX = mouseX;
+// 	currentY = mouseY;
+// 	minX += (lastX - currentX) * ratioX;
+// 	maxX += (lastX - currentX) * ratioX;
+// 	minY += (lastY - currentY) * ratioY;
+// 	maxY += (lastY - currentY) * ratioY;
+// 	lastX = 0;
+// 	lastY = 0;
+// 	currentX = 0;
+// 	currentY = 0;
+// 	loop();
+// }
 
-function mouseWheel() {
-	const dir = -(event.delta / abs(event.delta));
-	minX += 0.1 * dir;
-	maxX -= 0.1 * dir;
-	minY += 0.066 * dir;
-	maxY -= 0.066 * dir;
-}
+// function mouseWheel() {
+// 	const dir = -(event.delta / abs(event.delta));
+// 	minX += 0.1 * dir;
+// 	maxX -= 0.1 * dir;
+// 	minY += 0.066 * dir;
+// 	maxY -= 0.066 * dir;
+// }
