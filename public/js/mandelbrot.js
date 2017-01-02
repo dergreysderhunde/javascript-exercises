@@ -13,6 +13,7 @@ let minY;
 let maxY;
 let ratioX;
 let ratioY;
+let ratio;
 
 function setup() {
 	createCanvas(720, 480);
@@ -27,6 +28,7 @@ function setup() {
 	maxY = 1;
 	ratioX = (maxX - minX) / width;
 	ratioY = (maxY - minY) / height;
+	ratio = 1.5;
 }
 
 function draw() {
@@ -62,13 +64,32 @@ function draw() {
 				pixels[pix + 2] = 0;
 				pixels[pix + 3] = 255;
 			}			else {
-				let bright = map(n, 0, iterations, 0, 1);
-				bright = map(pow(bright, 0.25), 0, 1, 0, 255);
+				let bright = map(pow(n, ratio), 0, iterations, 0, 1);
 
-				pixels[pix + 0] = bright;
-				pixels[pix + 1] = 0;
-				pixels[pix + 2] = 255 - bright;
-				pixels[pix + 3] = 255;
+				if (bright < 0.42) {
+					pixels[pix + 0] = bright * (255 / 0.42);
+					pixels[pix + 1] = bright * (255 / 0.42);
+					pixels[pix + 2] = 100 + bright * (155 / 0.42);
+					pixels[pix + 3] = 255;
+				}
+				else if (bright < 0.64) {
+					pixels[pix + 0] = 255;
+					pixels[pix + 1] = 255 - (bright - 0.42) * (135 / 0.22);
+					pixels[pix + 2] = 255 - (bright - 0.42) * (255 / 0.22);
+					pixels[pix + 3] = 255;
+				}
+				else if (bright < 0.86) {
+					pixels[pix + 0] = 255 - (bright - 0.64) * (255 / 0.22);
+					pixels[pix + 1] = 170 - (bright - 0.64) * (170 / 0.22);
+					pixels[pix + 2] = 0;
+					pixels[pix + 3] = 255;
+				}
+				else {
+					pixels[pix + 0] = 0;
+					pixels[pix + 1] = 0;
+					pixels[pix + 2] = 0 + (bright - 0.86) * (100 / 0.14);
+					pixels[pix + 3] = 255;
+				}
 			}
 		}
 	}
