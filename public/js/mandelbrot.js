@@ -15,7 +15,7 @@ let ratioX;
 let ratioY;
 
 function setup() {
-	createCanvas(360, 240);
+	createCanvas(720, 480);
 	pixelDensity(1);
 	lastX = 0;
 	lastY = 0;
@@ -47,7 +47,7 @@ function draw() {
 				a = letA + constA;
 				b = letB + constB;
 
-				if (a === letA && b === letB) {
+				if (sqrt((a * a) + (b * b)) > 2) {
 					break;
 				}
 
@@ -56,18 +56,18 @@ function draw() {
 
 			const pix = (x + (y * width)) * 4;
 
-			if (n === iterations || (a === 0 && b === 0)) {
+			if (n === iterations) {
 				pixels[pix + 0] = 0;
 				pixels[pix + 1] = 0;
 				pixels[pix + 2] = 0;
 				pixels[pix + 3] = 255;
 			}			else {
 				let bright = map(n, 0, iterations, 0, 1);
-				bright = map(sqrt(bright), 0, 1, 0, 255);
+				bright = map(pow(bright, 0.25), 0, 1, 0, 255);
 
 				pixels[pix + 0] = bright;
-				pixels[pix + 1] = bright;
-				pixels[pix + 2] = 150;
+				pixels[pix + 1] = 0;
+				pixels[pix + 2] = 255 - bright;
 				pixels[pix + 3] = 255;
 			}
 		}
