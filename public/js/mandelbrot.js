@@ -1,7 +1,7 @@
 // author: Daniel Shiffman
 // source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 
-const iterations = 10;
+const iterations = 200;
 
 let lastX;
 let lastY;
