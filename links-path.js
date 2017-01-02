@@ -12,6 +12,10 @@ function paths(app, linksObject) {
 	});
 
 	app.get('/jsonbot', (req, res) => {
+		
+		// author: Daniel Shiffman
+		// source: https://www.youtube.com/watch?v=RF5_MPSNAtU
+
 		const Twit = require('twit');
 		const config = require('./config.json');
 		const T = new Twit(config);
