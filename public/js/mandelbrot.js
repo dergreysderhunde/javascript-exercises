@@ -1,8 +1,10 @@
 // author: Daniel Shiffman
 // source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 
-const iterations = 400;
+const minIterations = 100;
+const maxIterations = 4000;
 
+let iterations;
 let lastX;
 let lastY;
 let currentX;
@@ -35,6 +37,7 @@ function setup() {
 	p1 = 0.22;
 	p2 = 0.24;
 	p3 = 0.86;
+	iterations = minIterations;
 }
 
 function draw() {
@@ -136,4 +139,15 @@ function mouseWheel() {
 	maxY -= 0.05125 * (maxY - minY) * dir;
 	ratioX = (maxX - minX) / width;
 	ratioY = (maxY - minY) / height;
+	if (dir > 0) {
+		if (iterations < maxIterations) {
+			iterations = Math.floor(iterations *= 1.025);
+		}
+	}
+	if (dir < 0) {
+		if (iterations > minIterations) {
+			iterations = Math.floor(iterations *= 0.975);
+		}
+	}
+	console.log(iterations, minX, maxX);
 }
