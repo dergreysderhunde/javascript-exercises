@@ -1,43 +1,33 @@
-// author: Daniel Shiffman
-// source: https://www.youtube.com/watch?v=6z7GQewK-Ks
+// iterations
+const minIterations = 100; // minimum number of iterations
+const maxIterations = 4000; // maximum number of iterations
+let iterations = minIterations; // current number of iterations
 
-const minIterations = 100;
-const maxIterations = 4000;
+// drawing
+const canvasX = 100; // width of canvas
+const canvasY = 100; // height of canvas
+let minX = -2; // left limit
+let maxX = 2; // right limit
+let minY = -2; // top limit
+let maxY = 2; // bottom limit
 
-let iterations;
-let lastX;
-let lastY;
-let currentX;
-let currentY;
-let minX;
-let maxX;
-let minY;
-let maxY;
-let ratioX;
-let ratioY;
-let ratio;
-let p1;
-let p2;
-let p3;
+// drag and drop
+let lastX = 0; // horizontal value when mouse down
+let lastY = 0; // vertical value when mouse down
+let currentX = 0; // horizontal value when mouse up
+let currentY = 0; // vertical value when mouse up
+let ratioX = (maxX - minX) / canvasX; // proportion coordinates abscissae/canvas width
+let ratioY = (maxY - minY) / canvasY; // proportion coordinates ordinates/canvas height
+
+// couloring
+const ratio = 1; // exponent of the couloring curve
+const p1 = 0.22; // first stop point (white)
+const p2 = 0.24; // second stop point (orange)
+const p3 = 0.86; // third stop point (black)
 
 function setup() {
-	createCanvas(100, 100);
+	createCanvas(canvasX, canvasY);
 	pixelDensity(1);
-	lastX = 0;
-	lastY = 0;
-	currentX = 0;
-	currentY = 0;
-	minX = -2;
-	maxX = 2;
-	minY = -2;
-	maxY = 2;
-	ratioX = (maxX - minX) / width;
-	ratioY = (maxY - minY) / height;
-	ratio = 1;
-	p1 = 0.22;
-	p2 = 0.24;
-	p3 = 0.86;
-	iterations = minIterations;
 }
 
 function draw() {
@@ -72,33 +62,29 @@ function draw() {
 				pixels[pix + 1] = 0;
 				pixels[pix + 2] = 0;
 				pixels[pix + 3] = 255;
-			}
-			else {
-				let bright = map(n, 0 , iterations, 0, 1);
+			}			else {
+				let bright = map(n, 0, iterations, 0, 1);
 				bright = map(pow(bright, ratio), 0, 1, 0, 1);
 
 				if (bright < p1) {
 					pixels[pix + 0] = bright * (255 / p1);
 					pixels[pix + 1] = bright * (255 / p1);
-					pixels[pix + 2] = 100 + bright * (155 / p1);
+					pixels[pix + 2] = 100 + (bright * (155 / p1));
 					pixels[pix + 3] = 255;
-				}
-				else if (bright < p2) {
+				}				else if (bright < p2) {
 					pixels[pix + 0] = 255;
-					pixels[pix + 1] = 255 - (bright - p1) * (135 / (p2 - p1));
-					pixels[pix + 2] = 255 - (bright - p1) * (255 / (p2 - p1));
+					pixels[pix + 1] = 255 - ((bright - p1) * (135 / (p2 - p1)));
+					pixels[pix + 2] = 255 - ((bright - p1) * (255 / (p2 - p1)));
 					pixels[pix + 3] = 255;
-				}
-				else if (bright < p3) {
-					pixels[pix + 0] = 255 - (bright - p2) * (255 / (p3 - p2));
-					pixels[pix + 1] = 170 - (bright - p2) * (170 / (p3 - p2));
+				}				else if (bright < p3) {
+					pixels[pix + 0] = 255 - ((bright - p2) * (255 / (p3 - p2)));
+					pixels[pix + 1] = 170 - ((bright - p2) * (170 / (p3 - p2)));
 					pixels[pix + 2] = 0;
 					pixels[pix + 3] = 255;
-				}
-				else {
+				}				else {
 					pixels[pix + 0] = 0;
 					pixels[pix + 1] = 0;
-					pixels[pix + 2] = 0 + (bright - p3) * (100 / (1 - p3));
+					pixels[pix + 2] = 0 + ((bright - p3) * (100 / (1 - p3)));
 					pixels[pix + 3] = 255;
 				}
 			}
@@ -141,7 +127,7 @@ function mouseWheel() {
 	ratioY = (maxY - minY) / height;
 	if (dir > 0) {
 		if (iterations < maxIterations) {
-			iterations = Math.floor(iterations *= 1.025);
+			iterations = Math.ceil(iterations *= 1.025);
 		}
 	}
 	if (dir < 0) {
@@ -149,5 +135,4 @@ function mouseWheel() {
 			iterations = Math.floor(iterations *= 0.975);
 		}
 	}
-	console.log(iterations, minX, maxX);
 }

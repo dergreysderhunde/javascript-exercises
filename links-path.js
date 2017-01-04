@@ -12,7 +12,6 @@ function paths(app, linksObject) {
 	});
 
 	app.get('/jsonbot', (req, res) => {
-		
 		// author: Daniel Shiffman
 		// source: https://www.youtube.com/watch?v=RF5_MPSNAtU
 
