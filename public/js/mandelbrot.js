@@ -1,7 +1,7 @@
 // author: Daniel Shiffman
 // source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 
-const iterations = 200;
+const iterations = 400;
 
 let lastX;
 let lastY;
@@ -14,21 +14,27 @@ let maxY;
 let ratioX;
 let ratioY;
 let ratio;
+let p1;
+let p2;
+let p3;
 
 function setup() {
-	createCanvas(720, 480);
+	createCanvas(100, 100);
 	pixelDensity(1);
 	lastX = 0;
 	lastY = 0;
 	currentX = 0;
 	currentY = 0;
 	minX = -2;
-	maxX = 1;
-	minY = -1;
-	maxY = 1;
+	maxX = 2;
+	minY = -2;
+	maxY = 2;
 	ratioX = (maxX - minX) / width;
 	ratioY = (maxY - minY) / height;
-	ratio = 1.5;
+	ratio = 1;
+	p1 = 0.22;
+	p2 = 0.24;
+	p3 = 0.86;
 }
 
 function draw() {
@@ -63,31 +69,33 @@ function draw() {
 				pixels[pix + 1] = 0;
 				pixels[pix + 2] = 0;
 				pixels[pix + 3] = 255;
-			}			else {
-				let bright = map(pow(n, ratio), 0, iterations, 0, 1);
+			}
+			else {
+				let bright = map(n, 0 , iterations, 0, 1);
+				bright = map(pow(bright, ratio), 0, 1, 0, 1);
 
-				if (bright < 0.42) {
-					pixels[pix + 0] = bright * (255 / 0.42);
-					pixels[pix + 1] = bright * (255 / 0.42);
-					pixels[pix + 2] = 100 + bright * (155 / 0.42);
+				if (bright < p1) {
+					pixels[pix + 0] = bright * (255 / p1);
+					pixels[pix + 1] = bright * (255 / p1);
+					pixels[pix + 2] = 100 + bright * (155 / p1);
 					pixels[pix + 3] = 255;
 				}
-				else if (bright < 0.64) {
+				else if (bright < p2) {
 					pixels[pix + 0] = 255;
-					pixels[pix + 1] = 255 - (bright - 0.42) * (135 / 0.22);
-					pixels[pix + 2] = 255 - (bright - 0.42) * (255 / 0.22);
+					pixels[pix + 1] = 255 - (bright - p1) * (135 / (p2 - p1));
+					pixels[pix + 2] = 255 - (bright - p1) * (255 / (p2 - p1));
 					pixels[pix + 3] = 255;
 				}
-				else if (bright < 0.86) {
-					pixels[pix + 0] = 255 - (bright - 0.64) * (255 / 0.22);
-					pixels[pix + 1] = 170 - (bright - 0.64) * (170 / 0.22);
+				else if (bright < p3) {
+					pixels[pix + 0] = 255 - (bright - p2) * (255 / (p3 - p2));
+					pixels[pix + 1] = 170 - (bright - p2) * (170 / (p3 - p2));
 					pixels[pix + 2] = 0;
 					pixels[pix + 3] = 255;
 				}
 				else {
 					pixels[pix + 0] = 0;
 					pixels[pix + 1] = 0;
-					pixels[pix + 2] = 0 + (bright - 0.86) * (100 / 0.14);
+					pixels[pix + 2] = 0 + (bright - p3) * (100 / (1 - p3));
 					pixels[pix + 3] = 255;
 				}
 			}
@@ -97,33 +105,35 @@ function draw() {
 	updatePixels();
 }
 
-// function mousePressed() {
-// 	noLoop();
+function mousePressed() {
+	noLoop();
 
-// 	setTimeout(() => {
-// 		lastX = mouseX;
-// 		lastY = mouseY;
-// 	}, 0);
-// }
+	setTimeout(() => {
+		lastX = mouseX;
+		lastY = mouseY;
+	}, 0);
+}
 
-// function mouseReleased() {
-// 	currentX = mouseX;
-// 	currentY = mouseY;
-// 	minX += (lastX - currentX) * ratioX;
-// 	maxX += (lastX - currentX) * ratioX;
-// 	minY += (lastY - currentY) * ratioY;
-// 	maxY += (lastY - currentY) * ratioY;
-// 	lastX = 0;
-// 	lastY = 0;
-// 	currentX = 0;
-// 	currentY = 0;
-// 	loop();
-// }
+function mouseReleased() {
+	currentX = mouseX;
+	currentY = mouseY;
+	minX += (lastX - currentX) * ratioX;
+	maxX += (lastX - currentX) * ratioX;
+	minY += (lastY - currentY) * ratioY;
+	maxY += (lastY - currentY) * ratioY;
+	lastX = 0;
+	lastY = 0;
+	currentX = 0;
+	currentY = 0;
+	loop();
+}
 
-// function mouseWheel() {
-// 	const dir = -(event.delta / abs(event.delta));
-// 	minX += 0.1 * dir;
-// 	maxX -= 0.1 * dir;
-// 	minY += 0.066 * dir;
-// 	maxY -= 0.066 * dir;
-// }
+function mouseWheel() {
+	const dir = -(event.delta / abs(event.delta));
+	minX += 0.04875 * (maxX - minX) * dir;
+	maxX -= 0.05125 * (maxX - minX) * dir;
+	minY += 0.04875 * (maxY - minY) * dir;
+	maxY -= 0.05125 * (maxY - minY) * dir;
+	ratioX = (maxX - minX) / width;
+	ratioY = (maxY - minY) / height;
+}
