@@ -1,26 +1,26 @@
-function paths(app, linksObject) {
+const linksObject = require('./links-object.js').linksObject;
+
+// jsonbot dependencies
+const Twit = require('twit');
+const config = require('./config.json');
+const T = new Twit(config);
+
+function paths(app) {
 	app.get('/', (req, res) => {
 		res.render('index', linksObject);
 	});
+
+	app.get('/blanc', (req, res) => {
+		res.render('blanc');
+	})
 
 	app.get('/deepbunnyhole', (req, res) => {
 		res.render('deepbunnyhole');
 	});
 
-	app.get('/mandelbrot', (req, res) => {
-		res.render('mandelbrot');
-	});
-
+	// author: Daniel Shiffman
+	// source: https://www.youtube.com/watch?v=RF5_MPSNAtU
 	app.get('/jsonbot', (req, res) => {
-		// author: Daniel Shiffman
-		// source: https://www.youtube.com/watch?v=RF5_MPSNAtU
-
-		const Twit = require('twit');
-		const config = require('./config.json');
-		const T = new Twit(config);
-
-		res.render('jsonbot');
-
 		function bot() {
 			const date = new Date();
 			const seconds = date.getUTCSeconds();
@@ -36,8 +36,15 @@ function paths(app, linksObject) {
 				}
 			});
 		}
+
+		res.render('jsonbot');
+
 		bot();
 		setInterval(bot, 1000 * 60); // tweets each minute
+	});
+
+	app.get('/mandelbrot', (req, res) => {
+		res.render('mandelbrot');
 	});
 }
 
