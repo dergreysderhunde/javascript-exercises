@@ -1,0 +1,11 @@
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(to bottom right, #1D2247, rgb(0, 0, 150));
+	margin: 0;
+}
+
+canvas {
+	border-radius: 7px;
+}
