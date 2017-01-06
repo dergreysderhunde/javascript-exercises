@@ -10,14 +10,6 @@ function paths(app) {
 		res.render('index', linksObject);
 	});
 
-	app.get('/blanc', (req, res) => {
-		res.render('blanc');
-	})
-
-	app.get('/deepbunnyhole', (req, res) => {
-		res.render('deepbunnyhole');
-	});
-
 	// author: Daniel Shiffman
 	// source: https://www.youtube.com/watch?v=RF5_MPSNAtU
 	app.get('/jsonbot', (req, res) => {
@@ -43,6 +35,8 @@ function paths(app) {
 		setInterval(bot, 1000 * 60); // tweets each minute
 	});
 
+	// author: Daniel Shiffman
+	// source: https://www.youtube.com/watch?v=6z7GQewK-Ks
 	app.get('/mandelbrot', (req, res) => {
 		res.render('mandelbrot');
 	});
