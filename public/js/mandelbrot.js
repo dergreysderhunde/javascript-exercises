@@ -25,6 +25,14 @@ const p1 = 0.22; // first stop point (white)
 const p2 = 0.24; // second stop point (orange)
 const p3 = 0.86; // third stop point (black)
 
+let info = {
+	iterations: iterations,
+	minX: minX,
+	maxX: maxX,
+	minY: minY,
+	maxY: maxY
+}
+
 function setup() {
 	createCanvas(canvasX, canvasY);
 	pixelDensity(1);
@@ -94,6 +102,14 @@ function draw() {
 	updatePixels();
 }
 
+function updateInfo() {
+	info.iterations = iterations;
+	info.minX = minX;
+	info.maxX = maxX;
+	info.minY = minY;
+	info.maxY = maxY;
+}
+
 function mousePressed() {
 	noLoop();
 
@@ -115,6 +131,8 @@ function mouseReleased() {
 	currentX = 0;
 	currentY = 0;
 	loop();
+
+	updateInfo();
 }
 
 function mouseWheel() {
@@ -135,4 +153,6 @@ function mouseWheel() {
 			iterations = Math.floor(iterations *= 0.975);
 		}
 	}
+
+	updateInfo();
 }
