@@ -16,6 +16,12 @@ app.get('/', (req, res) => {
 	});
 });
 
+for (let i = 0; i < links.length; i++) {
+	app.get('/' + links[i].path, (req, res) => {
+		res.render(links[i].path + '.pug');
+	});
+}
+
 app.listen(8001, () => {
 	console.log('app running on http://127.0.0.1:8001');
-})
+});

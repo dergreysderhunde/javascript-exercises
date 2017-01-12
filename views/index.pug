@@ -1,1 +1,10 @@
 link(href="static/css/index.css", rel="stylesheet", type="text/css")
+-var i = 0
+while i < links.length / columns
+	div(class="links-list")
+		-var j = 0
+		while j < columns
+			if(links[i*columns+j])
+				a(class="link",href=(links[i*columns+j].path))=(links[i*columns+j].label)
+			-j++
+	-i++
