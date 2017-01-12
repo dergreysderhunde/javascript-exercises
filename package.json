@@ -1,0 +1,23 @@
+{
+  "name": "javascript-exercises",
+  "version": "1.0.0",
+  "description": "javascript stuff i found on the web",
+  "main": "app.js",
+  "scripts": {
+    "test": "xo --init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dergreysderhunde/javascript-exercises.git"
+  },
+  "keywords": [
+    "javascript",
+    "node"
+  ],
+  "author": "dergreysderhunde",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dergreysderhunde/javascript-exercises/issues"
+  },
+  "homepage": "https://github.com/dergreysderhunde/javascript-exercises#readme"
+}
