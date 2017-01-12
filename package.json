@@ -12,12 +12,17 @@
   },
   "keywords": [
     "javascript",
-    "node"
+    "node",
+    "express"
   ],
   "author": "dergreysderhunde",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/dergreysderhunde/javascript-exercises/issues"
   },
-  "homepage": "https://github.com/dergreysderhunde/javascript-exercises#readme"
+  "homepage": "https://github.com/dergreysderhunde/javascript-exercises#readme",
+  "dependencies": {
+    "express": "^4.14.0",
+    "pug": "^2.0.0-beta6"
+  }
 }
