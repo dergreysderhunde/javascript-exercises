@@ -13,7 +13,8 @@
   "keywords": [
     "javascript",
     "node",
-    "express"
+    "express",
+    "p5.js"
   ],
   "author": "dergreysderhunde",
   "license": "MIT",
