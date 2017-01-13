@@ -49,12 +49,12 @@ function mouseMoved() {
 function mouseWheel(e) {
 	if(e.delta < 0) {
 		for (let i = 0; i < n; i++) {
-			speed *= 1.001;
+			speed *= 1.0001;
 		}
 	}
 	if(e.delta > 0) {
 		for (let i = 0; i < n; i++) {
-			speed *= 0.999;
+			speed *= 0.9999;
 		}
 	}
 }
