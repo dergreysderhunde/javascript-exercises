@@ -4,8 +4,8 @@ module.exports.columns = columns;
 
 const links = [
 	// put your links on here!
-	{path: 'starfield', label: 'starfield'},
-	{path: 'mandelbrot', label: 'mandelbrot'}
+	{path: 'mandelbrot', label: 'mandelbrot'},
+	{path: 'starfield', label: 'starfield'}
 ];
 
 module.exports.links = links;
