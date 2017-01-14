@@ -31,7 +31,7 @@ let info = {
 	maxX: maxX,
 	minY: minY,
 	maxY: maxY
-}
+};
 
 function setup() {
 	createCanvas(canvasX, canvasY);
@@ -135,8 +135,8 @@ function mouseReleased() {
 	updateInfo();
 }
 
-function mouseWheel() {
-	const dir = -(event.delta / abs(event.delta));
+function mouseWheel(e) {
+	const dir = -(e.delta / abs(e.delta));
 	minX += 0.04875 * (maxX - minX) * dir;
 	maxX -= 0.05125 * (maxX - minX) * dir;
 	minY += 0.04875 * (maxY - minY) * dir;
