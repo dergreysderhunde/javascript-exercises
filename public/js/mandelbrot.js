@@ -20,10 +20,12 @@ let ratioX = (maxX - minX) / canvasX; // proportion coordinates abscissae/canvas
 let ratioY = (maxY - minY) / canvasY; // proportion coordinates ordinates/canvas height
 
 // couloring
-const ratio = 1; // exponent of the couloring curve
-const p1 = 0.22; // first stop point (white)
-const p2 = 0.24; // second stop point (orange)
-const p3 = 0.86; // third stop point (black)
+let ratio = 1; // exponent of the couloring curve
+const p1 = 0.166; // first stop point (white)
+const p2 = 0.333; // second stop point (orange)
+const p3 = 0.5; // third stop point (black)
+const p4 = 0.666; // third stop point (black)
+const p5 = 0.833; // third stop point (black)
 
 let info = {
 	iterations: iterations,
@@ -75,24 +77,34 @@ function draw() {
 				bright = map(pow(bright, ratio), 0, 1, 0, 1);
 
 				if (bright < p1) {
-					pixels[pix + 0] = bright * (255 / p1);
-					pixels[pix + 1] = bright * (255 / p1);
-					pixels[pix + 2] = 100 + (bright * (155 / p1));
-					pixels[pix + 3] = 255;
-				}				else if (bright < p2) {
 					pixels[pix + 0] = 255;
-					pixels[pix + 1] = 255 - ((bright - p1) * (135 / (p2 - p1)));
-					pixels[pix + 2] = 255 - ((bright - p1) * (255 / (p2 - p1)));
-					pixels[pix + 3] = 255;
-				}				else if (bright < p3) {
-					pixels[pix + 0] = 255 - ((bright - p2) * (255 / (p3 - p2)));
-					pixels[pix + 1] = 170 - ((bright - p2) * (170 / (p3 - p2)));
+					pixels[pix + 1] = 255 * (bright / p1);
 					pixels[pix + 2] = 0;
 					pixels[pix + 3] = 255;
-				}				else {
+				}				else if (bright < p2) {
+					pixels[pix + 0] = 255 - (255 * ((bright - p1)/(p2 - p1)));
+					pixels[pix + 1] = 255;
+					pixels[pix + 2] = 0;
+					pixels[pix + 3] = 255;
+				}				else if (bright < p3) {
 					pixels[pix + 0] = 0;
+					pixels[pix + 1] = 255;
+					pixels[pix + 2] = 255 * ((bright - p2)/(p3 - p2));
+					pixels[pix + 3] = 255;
+				}				else if (bright < p4) {
+					pixels[pix + 0] = 0;
+					pixels[pix + 1] = 255 - (255 * ((bright - p3)/(p4 - p3)));
+					pixels[pix + 2] = 255;
+					pixels[pix + 3] = 255;
+				}				else if (bright < p5) {
+					pixels[pix + 0] = 255 * ((bright - p4)/(p5 - p4));
 					pixels[pix + 1] = 0;
-					pixels[pix + 2] = 0 + ((bright - p3) * (100 / (1 - p3)));
+					pixels[pix + 2] = 255;
+					pixels[pix + 3] = 255;
+				}				else {
+					pixels[pix + 0] = 255;
+					pixels[pix + 1] = 0;
+					pixels[pix + 2] = 255 - (255 * ((bright - p5)/(p5 - p4)));
 					pixels[pix + 3] = 255;
 				}
 			}
